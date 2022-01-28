@@ -1,24 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useEffect, useState } from 'react';
+import TodoInput from './components/TodoInput';
+import Todos from './components/Todos';
+import { Itodo } from './models/Itodo';
+import './styles/main.css'
+import {MdDarkMode,MdWbSunny} from 'react-icons/md'
 
-function App() {
+const App: FC = () => {
+  const [todo, setTodo] = useState<string>('')
+  const [todos, setTodos] = useState<Array<Itodo>>(JSON.parse(localStorage.getItem('todos') || '') || [])
+  const [isDark,setIsDark] = useState<boolean>(false)
+  
+  useEffect(()=>{
+    localStorage.setItem('todos',JSON.stringify(todos))
+  },[todos])
+
+  const addTodo = ():void => {  
+    const dt = new Date()
+    if (todo) {
+      setTodos([...todos, { id: dt.getTime(), todo , isDone:false}])
+      setTodo('')
+    }
+  }
+
+  const removeTodo = (id:number):void=>{
+      setTodos(todos.filter((t)=>t.id!==id))
+  }
+
+  const updateTodo = (id:number,todoU:string):void=>{
+    setTodos(todos.map((t)=>{
+      if(t.id===id){
+        t.todo=todoU
+      }
+      return t;
+    }))
+  }
+
+  const addToDone = (id:number):void=>{
+    setTodos(todos.map((t)=>{
+      if(t.id===id){
+        t.isDone=true;
+      }
+      return t;
+    }))
+  }
+
+  const toMode = ():void=>{
+    setIsDark(!isDark)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main' style={{backgroundColor:isDark?'rgb(18 19 23)':'rgb(253, 230, 234)'}}>
+      <TodoInput todo={todo} setTodo={setTodo} addTodo={addTodo} />
+      <Todos addToDone={addToDone} updateTodo={updateTodo} todos={todos} removeTodo={removeTodo}/>
+      
+      {
+        isDark?<MdWbSunny style={{color:'#e4d12e'}} onClick={toMode} className='mode'/>:<MdDarkMode onClick={toMode} className='mode'/>
+      }
     </div>
   );
 }
