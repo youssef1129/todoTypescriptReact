@@ -33,6 +33,6 @@
   "background_color": "rgb(252,143,121)",
   "display": "fullscreen",
   "orientation": "portrait",
-  "scope": "/",
-  "start_url": "/"
+  "scope": ".",
+  "start_url": "."
 }
