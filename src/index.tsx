@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import registerServiceWorker from "./serviceWorker";
 
 
 ReactDOM.render(
@@ -14,4 +13,3 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-registerServiceWorker()

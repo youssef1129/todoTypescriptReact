@@ -7,8 +7,17 @@ import {MdDarkMode,MdWbSunny} from 'react-icons/md'
 
 const App: FC = () => {
   const [todo, setTodo] = useState<string>('')
-  const [todos, setTodos] = useState<Array<Itodo>>(JSON.parse(localStorage.getItem('todos') || '') || [])
   const [isDark,setIsDark] = useState<boolean>(false)
+  
+  const getData = ()=>{
+    try {
+      return JSON.parse(localStorage.getItem('todos') || '')
+    } catch (error) {
+      
+    }
+  }
+  
+  const [todos, setTodos] = useState<Array<Itodo>>(getData()|| [])
   
   useEffect(()=>{
     localStorage.setItem('todos',JSON.stringify(todos))

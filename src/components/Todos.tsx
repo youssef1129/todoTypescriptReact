@@ -18,7 +18,7 @@ const Todos: FC<props> = ({ addToDone,todos, removeTodo, updateTodo }) => {
       {
         todos.map((t: Itodo) => {
           if (!t.isDone) {
-            return <Todo addToDone={addToDone} key={t.id} updateTodo={updateTodo} id={t.id} todo={t.todo} removeTodo={removeTodo} />
+            return <Todo todos={todos} addToDone={addToDone} key={t.id} updateTodo={updateTodo} id={t.id} todo={t.todo} removeTodo={removeTodo} />
           }
         })
       }
@@ -27,7 +27,7 @@ const Todos: FC<props> = ({ addToDone,todos, removeTodo, updateTodo }) => {
       {
        todos.map((t: Itodo) => {
           if (t.isDone) {
-            return <DoneTodo  key={t.id}  id={t.id} todo={t.todo} removeTodo={removeTodo}/>
+            return <DoneTodo todos={todos} key={t.id}  id={t.id} todo={t.todo} removeTodo={removeTodo}/>
           }
         })
       }

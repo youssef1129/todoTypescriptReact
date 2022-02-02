@@ -2,8 +2,8 @@
   "name": "todotypescript",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://youssef1129.github.io/todoTypescriptReact",
   "dependencies": {
-    "homepage": "https://youssef1129.github.io/todoTypescriptReact",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
